@@ -1,0 +1,22 @@
+name: DAST with OWASP ZAP
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  zap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run OWASP ZAP Scan
+        uses: zaproxy/action-full-scan@v0.0.3
+        with:
+          target: 'http://localhost'
